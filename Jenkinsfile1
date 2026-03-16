@@ -19,22 +19,16 @@ pipeline {
     
         stage("Sonar Cube Analysis") {
             environment { 
-            scannerHome = tool 'shinushiju-sonar-scanner'
-            SONAR_TOKEN = credentials('sonar-token')
+                scannerHome = tool 'shinushiju-sonar-scanner'
+            }
+            steps{
+            withSonarQubeEnv('shinushiju-sonarqube-server'){
+                sh "${scannerHome}/bin/sonar-scanner"
+            }    
+            }
 
-            }
-            steps {
-                withSonarQubeEnv("shinushiju-sonarcube-server") {
-                sh """
-                ${scannerHome}/bin/sonar-scanner \
-                -Dsonar.projectKey=shinushiju01-key_twittertrend \
-                -Dsonar.organization=shinushiju01-key \
-                -Dsonar.host.url=https://sonarcloud.io \
-                -Dsonar.login=${SONAR_TOKEN}
-                """
-                 }
-            }
         }
+           
 
     }
 

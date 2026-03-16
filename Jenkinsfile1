@@ -22,7 +22,7 @@ pipeline {
                 scannerHome = tool 'shinushiju-sonar-scanner'
             }
             steps{
-            withSonarQubeEnv('shinushiju-sonarqube-server'){
+            withSonarQubeEnv('shinushiju-sonarcube-server'){
                 sh "${scannerHome}/bin/sonar-scanner"
             }    
             }

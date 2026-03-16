@@ -20,6 +20,7 @@ pipeline {
         stage("Sonar Cube Analysis") {
             environment { 
             scannerHome = tool 'shinushiju-sonar-scanner'
+            SONAR_TOKEN = credentials('sonar-token')
             }
             steps {
                 withSonarQubeEnv("shinushiju-sonarcube-server") {

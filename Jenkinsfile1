@@ -16,15 +16,16 @@ pipeline {
                 
             }
         }
-    }
-    stage("Sonar Cube Analysis") {
-    environment { 
-        scannerHome = tool 'shinushiju-sonar-scanner';
-    }
-    steps {
-    withSonarQubeEnv("shinushiju-sonarcube-server") {
-        sh "$(scannerHome)/bin/sonar-scanner"
-    }
-    }
+    
+        stage("Sonar Cube Analysis") {
+        environment { 
+        scannerHome = tool 'shinushiju-sonar-scanner'
+        }
+        steps {
+        withSonarQubeEnv("shinushiju-sonarcube-server") {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        }
+        }
     }
 }
